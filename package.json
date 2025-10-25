@@ -1,0 +1,78 @@
+{
+  "name": "zalo-mini-app-clone",
+  "displayName": "zalo-mini-app-clone",
+  "description": "a pet project clone zalo mini app extention",
+  "version": "0.0.1",
+  "engines": {
+    "vscode": "^1.105.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "main": "./out/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "zalo-mini-app-clone.helloWorld",
+        "title": "Hello World"
+      },
+      {
+        "command": "zalo-mini-app-clone.openMiniApp",
+        "title": "Open Mini App"
+      }
+    ],
+    "viewsContainers": {
+      "activitybar": [
+        {
+          "id": "zaloMiniApp",
+          "title": "Zalo Mini App",
+          "icon": "media/icon.svg"
+        }
+      ]
+    },
+    "views": {
+      "zaloMiniApp": [
+        {
+          "type": "webview",
+          "icon": "media/icon.svg",
+          "id": "home",
+          "name": "Home"
+        }
+      ]
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "yarn run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "pretest": "yarn run compile && yarn run lint",
+    "lint": "eslint src",
+    "test": "vscode-test",
+    "build:sidebar": "esbuild src/sidebar-ui/main.tsx --bundle --outfile=dist/main.js --platform=browser --target=es2020",
+    "watch:sidebar": "esbuild src/sidebar-ui/main.tsx --bundle --outfile=dist/main.js --platform=browser --target=es2020 --watch"
+  },
+  "devDependencies": {
+    "@types/mocha": "^10.0.10",
+    "@types/node": "22.x",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "@types/vscode": "^1.105.0",
+    "@typescript-eslint/eslint-plugin": "^8.45.0",
+    "@typescript-eslint/parser": "^8.45.0",
+    "@vscode/test-cli": "^0.0.11",
+    "@vscode/test-electron": "^2.5.2",
+    "esbuild": "^0.25.11",
+    "eslint": "^9.36.0",
+    "typescript": "^5.9.3"
+  },
+  "packageManager": "yarn@4.10.3+sha512.c38cafb5c7bb273f3926d04e55e1d8c9dfa7d9c3ea1f36a4868fa028b9e5f72298f0b7f401ad5eb921749eb012eb1c3bb74bf7503df3ee43fd600d14a018266f",
+  "dependencies": {
+    "@tailwindcss/vite": "^4.1.16",
+    "react": "^19.2.0",
+    "react-dom": "^19.2.0",
+    "tailwindcss": "^4.1.16"
+  },
+  "workspaces": [
+    "packages/*"
+  ]
+}
