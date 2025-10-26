@@ -17,6 +17,9 @@ const Home = () => {
           Close mini app
         </button>
       </div>
+      <div className="gap-2 flex items-center px-2 py-1 text-[var(--vscode-tab-inactiveForeground)] bg-[var(--vscode-tab-activeBackground)]">
+        Recent project
+      </div>
     </div>
   );
 };
