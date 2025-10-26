@@ -1,4 +1,4 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -8,6 +8,15 @@
   </head>
   <body>
     <div id="root"></div>
+    <!-- inject init app state from host -->
+    <script>
+      if (
+        typeof __init_app_setting__ !== "undefined" &&
+        !!__init_app_setting__
+      ) {
+        window.__INIT_APP_SETTING__ = __init_app_setting__;
+      }
+    </script>
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>

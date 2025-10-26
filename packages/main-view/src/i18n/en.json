@@ -1,0 +1,22 @@
+{
+  "main-home-title": "Home",
+  "main-setting-title": "Setting",
+  "home-title": "Home",
+  "home-button-new-mini-app": "New mini app",
+  "home-button-open-mini-app": "Open mini app",
+  "home-button-close-mini-app": "Close mini app",
+  "home-recent-project-title": "Recent project",
+  "setting-title": "Mini app extension",
+  "setting-language-title": "Language",
+  "setting-language-en": "English",
+  "setting-language-vi": "Vietnamese",
+  "setting-move-sidebar-to-right-title": "Move sidebar to right",
+  "setting-move-sidebar-to-left-title": "Move sidebar to left",
+  "setting-move-sidebar-to-right-description": "Move sidebar to the right side of vscode or click move below",
+  "setting-move-sidebar-to-left-description": "Move sidebar to the left side of vscode or click move below",
+  "setting-move-sidebar-to-right-button": "Move",
+  "setting-move-sidebar-to-left-button": "Move",
+  "setting-guide-title": "Guide",
+  "setting-guide-description": "Turn guide off to make it simple",
+  "setting-guide-button": "Toggle guide"
+}

@@ -1,24 +1,27 @@
 import { HomeIcon } from "lucide-react";
+import useI18n from "@/hooks/useI18n";
 
 const Home = () => {
+  const t = useI18n();
+
   return (
     <div>
       <div className="gap-2 flex items-center px-2 py-1 text-[var(--vscode-tab-inactiveForeground)] bg-[var(--vscode-tab-activeBackground)]">
-        <HomeIcon /> Home
+        <HomeIcon /> {t("home-title")}
       </div>
       <div className="flex items-center bg-[var(--vscode-tab-inactiveBackground)] p-2 gap-3">
         <button className="text-[var(--vscode-button-foreground)] bg-[var(--vscode-button-background)] px-2 py-1 rounded">
-          New mini app
+          {t("home-button-new-mini-app")}
         </button>
         <button className="text-[var(--vscode-button-foreground)] bg-[var(--vscode-tab-activeBackground)] px-2 py-1 rounded">
-          Open mini app
+          {t("home-button-open-mini-app")}
         </button>
         <button className="text-[var(--vscode-button-foreground)] bg-[var(--vscode-tab-activeBackground)] px-2 py-1 rounded">
-          Close mini app
+          {t("home-button-close-mini-app")}
         </button>
       </div>
       <div className="gap-2 flex items-center px-2 py-1 text-[var(--vscode-tab-inactiveForeground)] bg-[var(--vscode-tab-activeBackground)]">
-        Recent project
+        {t("home-recent-project-title")}
       </div>
     </div>
   );

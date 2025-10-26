@@ -1,0 +1,22 @@
+{
+  "main-home-title": "Trang chủ",
+  "main-setting-title": "Cài đặt",
+  "home-title": "Trang chủ",
+  "home-button-new-mini-app": "Tạo mini app mới",
+  "home-button-open-mini-app": "Mở mini app",
+  "home-button-close-mini-app": "Đóng mini app",
+  "home-recent-project-title": "Dự án gần đây",
+  "setting-title": "Tiện ích mở rộng Mini App",
+  "setting-language-title": "Ngôn ngữ",
+  "setting-language-en": "Tiếng Anh",
+  "setting-language-vi": "Tiếng Việt",
+  "setting-move-sidebar-to-right-title": "Chuyển thanh bên sang phải",
+  "setting-move-sidebar-to-left-title": "Chuyển thanh bên sang trái",
+  "setting-move-sidebar-to-right-description": "Chuyển thanh bên sang bên phải của VS Code hoặc nhấn nút bên dưới",
+  "setting-move-sidebar-to-left-description": "Chuyển thanh bên sang bên trái của VS Code hoặc nhấn nút bên dưới",
+  "setting-move-sidebar-to-right-button": "Chuyển",
+  "setting-move-sidebar-to-left-button": "Chuyển",
+  "setting-guide-title": "Hướng dẫn",
+  "setting-guide-description": "Tắt hướng dẫn để giao diện đơn giản hơn",
+  "setting-guide-button": "Bật/tắt hướng dẫn"
+}

@@ -11,5 +11,5 @@ export default defineConfig({
       "@": path.resolve(__dirname, "./src"),
     },
   },
-  base: "__vscode_webview_base__", // 👈 placeholder
+  base: "__webview_base__", // 👈 placeholder
 });

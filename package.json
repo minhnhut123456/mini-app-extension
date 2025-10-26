@@ -1,6 +1,7 @@
 {
   "name": "zalo-mini-app-clone",
   "displayName": "zalo-mini-app-clone",
+  "publisher": "NgoMinhNhut",
   "description": "a pet project clone zalo mini app extention",
   "version": "0.0.1",
   "engines": {
