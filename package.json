@@ -3,7 +3,7 @@
   "displayName": "zalo-mini-app-clone",
   "publisher": "NgoMinhNhut",
   "description": "a pet project clone zalo mini app extention",
-  "version": "0.0.1",
+  "version": "0.0.3",
   "engines": {
     "vscode": "^1.105.0"
   },
