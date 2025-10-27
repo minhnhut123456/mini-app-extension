@@ -4,8 +4,11 @@
   "template-vite-js-title": "Vite + JavaScript",
   "template-vite-js-description": "A sample project using Vite + JavaScript",
   "template-placeholder": "Select template",
+  "template-select-folder": "Select folder",
   "template-input-prompt": "Enter a folder name for creating a mini app from the <%= name %> template",
   "template-input-placeholder": "Enter a folder name",
   "template-input-prompt-error-empty": "Folder name cannot be empty",
-  "template-input-prompt-error-space": "Should not contain spaces"
+  "template-input-prompt-error-space": "Should not contain spaces",
+  "template-folder-exist": "Folder already exists. Please choose a different name.",
+  "template-success": "Mini app created successfully!"
 }

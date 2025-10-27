@@ -49,9 +49,9 @@ export async function activate(context: vscode.ExtensionContext) {
       PersistedStateKey.HAS_JUST_CREATE_MINI_APP,
       false
     );
-    await vscode.commands.executeCommand(
-      "workbench.view.extension.zalo-mini-app-clone"
-    );
+    // await vscode.commands.executeCommand(
+    //   "workbench.view.extension.zalo-mini-app-clone"
+    // );
   }
 
   const provider = new MainViewProvider(context);
