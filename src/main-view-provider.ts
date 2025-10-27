@@ -1,8 +1,13 @@
 import * as vscode from "vscode";
 import fs from "fs";
 import path from "path";
-
-const WebviewAppSettingKey = "webview-app-setting";
+import {
+  setAppState,
+  appState,
+  SidebarPosition,
+  WebviewAppState,
+} from "./global-state";
+import { MessageType, PersistedStateKey, RegisteredCommand } from "./constants";
 
 export class MainViewProvider implements vscode.WebviewViewProvider {
   constructor(private readonly _extension: vscode.ExtensionContext) {}
@@ -16,17 +21,20 @@ export class MainViewProvider implements vscode.WebviewViewProvider {
     };
 
     //  Sidebar position
-    const location = vscode.workspace
+    const sidebarPosition = vscode.workspace
       .getConfiguration("workbench")
-      .get("sideBar.location");
+      .get<SidebarPosition>("sideBar.location");
 
-    const webviewAppState = this._extension.globalState.get(
-      WebviewAppSettingKey,
-      {
-        language: "vi",
-        guide: true,
-      }
-    );
+    const webviewAppState = this._extension.globalState.get<
+      Pick<WebviewAppState, "language" | "guide">
+    >(PersistedStateKey.WEBVIEW_APP_SETTING);
+
+    // Update global app state from persisted data
+    setAppState({
+      language: webviewAppState?.language,
+      guide: webviewAppState?.guide,
+      sidebarPosition: sidebarPosition,
+    });
 
     const distUri = vscode.Uri.joinPath(
       this._extension.extensionUri,
@@ -52,27 +60,29 @@ export class MainViewProvider implements vscode.WebviewViewProvider {
     }
 
     // Inject initial app state
-    html = html.replaceAll(
-      "__init_app_setting__",
-      JSON.stringify({
-        ...webviewAppState,
-        sidebarPosition: location === "right" ? "right" : "left",
-      })
-    );
+    html = html.replaceAll("__init_app_setting__", JSON.stringify(appState));
 
     // Handle messages from the webview
     webview.onDidReceiveMessage((message) => {
       switch (message.type) {
-        case "set-setting":
+        case MessageType.SET_SETTING:
+          // Persist setting
           this._extension.globalState.update(
-            WebviewAppSettingKey,
+            PersistedStateKey.WEBVIEW_APP_SETTING,
             message.payload
           );
+
+          // Update global app state
+          setAppState(message.payload);
           break;
-        case "toggle-sidebar-position":
+        case MessageType.TOGGLE_SIDEBAR_POSITION:
           vscode.commands.executeCommand(
             "workbench.action.toggleSidebarPosition"
           );
+          break;
+
+        case MessageType.TRIGGER_CREATE_MINI_APP:
+          vscode.commands.executeCommand(RegisteredCommand.CREATE_MINI_APP);
           break;
       }
     });

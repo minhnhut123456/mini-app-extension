@@ -1,0 +1,11 @@
+{
+  "template-vite-ts-title": "Vite + TypeScript",
+  "template-vite-ts-description": "A sample project using Vite + TypeScript",
+  "template-vite-js-title": "Vite + JavaScript",
+  "template-vite-js-description": "A sample project using Vite + JavaScript",
+  "template-placeholder": "Select template",
+  "template-input-prompt": "Enter a folder name for creating a mini app from the <%= name %> template",
+  "template-input-placeholder": "Enter a folder name",
+  "template-input-prompt-error-empty": "Folder name cannot be empty",
+  "template-input-prompt-error-space": "Should not contain spaces"
+}

@@ -1,0 +1,11 @@
+{
+  "template-vite-ts-title": "Vite + TypeScript",
+  "template-vite-ts-description": "Project mẫu sử dụng Vite + TypeScript",
+  "template-vite-js-title": "Vite + JavaScript",
+  "template-vite-js-description": "Project mẫu sử dụng Vite + JavaScript",
+  "template-placeholder": "Chọn template",
+  "template-input-prompt": "Nhập tên thư mục cho hành động tạo mini app từ template <%= name %>",
+  "template-input-placeholder": "Enter a folder name",
+  "template-input-prompt-error-empty": "Tên thư mục không được để trống",
+  "template-input-prompt-error-space": "Không nên chứa khoảng trắng"
+}
