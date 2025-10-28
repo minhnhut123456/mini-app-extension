@@ -3,14 +3,14 @@
   "displayName": "zalo-mini-app-clone",
   "publisher": "NgoMinhNhut",
   "description": "a pet project clone zalo mini app extention",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "engines": {
     "vscode": "^1.105.0"
   },
   "categories": [
     "Other"
   ],
-  "main": "./out/extension.js",
+  "main": "./dist/extension.js",
   "contributes": {
     "commands": [
       {
@@ -43,14 +43,16 @@
     }
   },
   "scripts": {
-    "vscode:prepublish": "yarn run compile",
-    "compile": "tsc -p ./",
-    "watch": "tsc -watch -p ./",
-    "pretest": "yarn run compile && yarn run lint",
+    "vscode:prepublish": "yarn package",
+    "package": "yarn check-types && node esbuild.js --production",
+    "compile": "yarn check-types && node esbuild.js",
+    "check-types": "tsc --noEmit",
+    "watch": "npm-run-all -p \"watch:esbuild\" \"watch:tsc\"",
+    "watch:esbuild": "node esbuild.js --watch",
+    "watch:tsc": "tsc --noEmit --watch --project tsconfig.json",
+    "pretest": "yarn compile && yarn lint",
     "lint": "eslint src",
-    "test": "vscode-test",
-    "build:sidebar": "esbuild src/sidebar-ui/main.tsx --bundle --outfile=dist/main.js --platform=browser --target=es2020",
-    "watch:sidebar": "esbuild src/sidebar-ui/main.tsx --bundle --outfile=dist/main.js --platform=browser --target=es2020 --watch"
+    "test": "vscode-test"
   },
   "devDependencies": {
     "@types/mocha": "^10.0.10",
@@ -64,6 +66,7 @@
     "@vscode/test-electron": "^2.5.2",
     "esbuild": "^0.25.11",
     "eslint": "^9.36.0",
+    "npm-run-all": "^4.1.5",
     "typescript": "^5.9.3"
   },
   "packageManager": "yarn@4.10.3+sha512.c38cafb5c7bb273f3926d04e55e1d8c9dfa7d9c3ea1f36a4868fa028b9e5f72298f0b7f401ad5eb921749eb012eb1c3bb74bf7503df3ee43fd600d14a018266f",
