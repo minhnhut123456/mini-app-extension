@@ -1,6 +1,4 @@
 import * as vscode from "vscode";
-import fs from "fs";
-import path from "path";
 import {
   setAppState,
   appState,
@@ -12,7 +10,7 @@ import { MessageType, PersistedStateKey, RegisteredCommand } from "./constants";
 export class MainViewProvider implements vscode.WebviewViewProvider {
   constructor(private readonly _extension: vscode.ExtensionContext) {}
 
-  resolveWebviewView(webviewView: vscode.WebviewView) {
+  async resolveWebviewView(webviewView: vscode.WebviewView) {
     const webview = webviewView.webview;
 
     webview.options = {
@@ -44,18 +42,29 @@ export class MainViewProvider implements vscode.WebviewViewProvider {
     );
     const webviewDistUri = webview.asWebviewUri(distUri);
 
-    let html = fs.readFileSync(path.join(distUri.fsPath, "index.html"), "utf8");
+    // --- Read index.html ---
+    const indexUri = vscode.Uri.joinPath(distUri, "index.html");
+    let htmlBytes = await vscode.workspace.fs.readFile(indexUri);
+    let html = new TextDecoder("utf-8").decode(htmlBytes);
 
-    // Replace place holder base path in dist files
+    // --- Prepare base URL ---
     const baseUrl = webviewDistUri.toString() + "/";
     html = html.replaceAll("/__webview_base__/", baseUrl);
-    const files = fs.readdirSync(path.join(distUri.fsPath, "assets"));
-    for (const file of files) {
-      if (/\.(css|js)$/.test(file)) {
-        const filePath = path.join(distUri.fsPath, "assets", file);
-        let content = fs.readFileSync(filePath, "utf8");
+
+    // --- Process assets ---
+    const assetsUri = vscode.Uri.joinPath(distUri, "assets");
+    const assets = await vscode.workspace.fs.readDirectory(assetsUri);
+
+    for (const [file, type] of assets) {
+      if (type === vscode.FileType.File && /\.(css|js)$/.test(file)) {
+        const fileUri = vscode.Uri.joinPath(assetsUri, file);
+        let contentBytes = await vscode.workspace.fs.readFile(fileUri);
+        let content = new TextDecoder("utf-8").decode(contentBytes);
         content = content.replaceAll("/__webview_base__/", baseUrl);
-        fs.writeFileSync(filePath, content, "utf8");
+        await vscode.workspace.fs.writeFile(
+          fileUri,
+          new TextEncoder().encode(content)
+        );
       }
     }
 
