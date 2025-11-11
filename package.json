@@ -3,7 +3,7 @@
   "displayName": "zalo-mini-app-clone",
   "publisher": "NgoMinhNhut",
   "description": "a pet project clone zalo mini app extention",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "engines": {
     "vscode": "^1.105.0"
   },
@@ -12,16 +12,6 @@
   ],
   "main": "./dist/extension.js",
   "contributes": {
-    "commands": [
-      {
-        "command": "zalo-mini-app-clone.helloWorld",
-        "title": "Hello World"
-      },
-      {
-        "command": "zalo-mini-app-clone.openMiniApp",
-        "title": "Open Mini App"
-      }
-    ],
     "viewsContainers": {
       "activitybar": [
         {
@@ -74,7 +64,8 @@
     "@tailwindcss/vite": "^4.1.16",
     "react": "^19.2.0",
     "react-dom": "^19.2.0",
-    "tailwindcss": "^4.1.16"
+    "tailwindcss": "^4.1.16",
+    "vite": "^7.2.2"
   },
   "workspaces": [
     "packages/*"

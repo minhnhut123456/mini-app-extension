@@ -9,7 +9,7 @@
       "label": "yarn watch",
       "dependsOn": ["yarn: watch:tsc", "yarn: watch:esbuild"],
       "presentation": {
-        "reveal": "never"
+        "reveal": "always"
       },
       "group": {
         "kind": "build",
@@ -25,7 +25,7 @@
       "problemMatcher": "$esbuild-watch",
       "presentation": {
         "group": "watch",
-        "reveal": "never"
+        "reveal": "always"
       },
       "group": "build"
     },
@@ -37,7 +37,7 @@
       "problemMatcher": "$tsc-watch",
       "presentation": {
         "group": "watch",
-        "reveal": "never"
+        "reveal": "always"
       },
       "group": "build"
     }

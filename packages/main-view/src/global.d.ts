@@ -17,6 +17,9 @@ declare global {
       language: Language;
       guide: boolean;
       sidebarPosition: SidebarPosition;
+      devChannel: DevChannels;
+      device: Devices;
+      simulatorUrl: string;
     };
 
     /** Global acquire function (injected by VS Code) */

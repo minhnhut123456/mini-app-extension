@@ -2,15 +2,13 @@ import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import "./index.css";
 import App from "./app";
-import { createSettingStore, useSettingStore } from "./stores/setting";
-import { initVscodeApi, vscodeApi } from "./stores/vs-code-api";
+import { createSettingStore } from "./stores/setting";
+import { initVscodeApi } from "./stores/vs-code-api";
+import { registerVscodeApiEvents } from "./vscode-events/on-events";
 
-if (!vscodeApi) {
-  initVscodeApi();
-}
-if (!useSettingStore) {
-  createSettingStore(window.__INIT_APP_SETTING__);
-}
+initVscodeApi();
+createSettingStore(window.__INIT_APP_SETTING__);
+registerVscodeApiEvents();
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>

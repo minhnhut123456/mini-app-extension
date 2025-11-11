@@ -1,12 +1,14 @@
 import { useState } from "react";
 import Home from "./components/home";
 import Setting from "./components/setting";
+import Develop from "./components/develop";
 import clsx from "clsx";
 import useI18n from "./hooks/useI18n";
 
 const Tab = {
   Home: "home",
   Setting: "setting",
+  Develop: "develop",
 } as const;
 
 type Tab = (typeof Tab)[keyof typeof Tab];
@@ -40,9 +42,21 @@ function App() {
         >
           {t("main-setting-title")}
         </div>
+        <div
+          onClick={() => setTab(Tab.Develop)}
+          className={clsx(
+            "flex-1 flex items-center gap-2 px-2 py-1 cursor-pointer text-center text-[var(--vscode-button-foreground)] justify-center",
+            tab === Tab.Develop
+              ? "bg-[var(--vscode-tab-activeBackground)]"
+              : "bg-[var(--vscode-tab-inactiveBackground)]"
+          )}
+        >
+          {t("main-develop-title")}
+        </div>
       </div>
       {tab === Tab.Home && <Home />}
       {tab === Tab.Setting && <Setting />}
+      {tab === Tab.Develop && <Develop />}
     </div>
   );
 }

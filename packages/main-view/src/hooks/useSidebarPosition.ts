@@ -1,6 +1,6 @@
 import { useCallback } from "react";
 import { useSettingStore } from "../stores/setting";
-import { vscodeApi } from "../stores/vs-code-api";
+import { toggleSidebarPosition as toggleSidebarPositionPostEvent } from "../vscode-events/fire-events";
 
 const useSidebarPosition = () => {
   const sidebarPosition =
@@ -11,9 +11,7 @@ const useSidebarPosition = () => {
 
   const toggleSidebarPosition = useCallback(() => {
     zToggleSidebarPosition?.();
-    vscodeApi?.postMessage({
-      type: "toggle-sidebar-position",
-    });
+    toggleSidebarPositionPostEvent();
   }, [zToggleSidebarPosition]);
 
   return { toggleSidebarPosition, sidebarPosition };

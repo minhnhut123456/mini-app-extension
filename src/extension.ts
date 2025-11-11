@@ -5,6 +5,7 @@ import { MainViewProvider } from "./main-view-provider";
 import { PersistedStateKey, RegisteredCommand } from "./constants";
 import { getLanguageDict } from "./global-state";
 import ejs from "ejs";
+import "./bootstrap";
 
 const copyAndRender = async (
   src: vscode.Uri,

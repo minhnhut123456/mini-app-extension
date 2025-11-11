@@ -13,7 +13,13 @@ async function main() {
     sourcesContent: false,
     platform: "node",
     outfile: "dist/extension.js",
-    external: ["vscode"],
+    // external: ["vscode"],
+    external: [
+      "vscode",
+      "lightningcss", // Vite’s CSS processor
+      "fsevents",
+      "esbuild",
+    ],
     logLevel: "warning",
     plugins: [
       /* add to the end of plugins array */

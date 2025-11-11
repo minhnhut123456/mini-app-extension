@@ -2,6 +2,7 @@ export const MessageType = {
   SET_SETTING: "set-setting",
   TOGGLE_SIDEBAR_POSITION: "toggle-sidebar-position",
   TRIGGER_CREATE_MINI_APP: "trigger-create-mini-app",
+  TURN_DEV_SERVER: "turn-dev-server",
 };
 
 export const PersistedStateKey = {

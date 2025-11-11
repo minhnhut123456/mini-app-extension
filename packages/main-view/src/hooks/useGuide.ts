@@ -1,21 +1,19 @@
 import { useSettingStore } from "../stores/setting";
 import { useCallback } from "react";
-import { vscodeApi } from "../stores/vs-code-api";
+import { setSetting } from "../vscode-events/fire-events";
+import { DefaultLanguage, DefaultGuide } from "../stores/setting";
 
 const useGuide = () => {
-  const guide = useSettingStore?.((state) => state.guide) ?? false;
+  const guide = useSettingStore?.((state) => state.guide) ?? DefaultGuide;
   const zToggleGuide = useSettingStore?.((state) => state.toggleGuide);
 
   const toggleGuide = useCallback(
     (value: boolean) => {
       zToggleGuide?.();
-      vscodeApi?.postMessage({
-        type: "set-setting",
-        payload: {
-          language: useSettingStore?.getState().language,
-          guide: value,
-        },
-      });
+      setSetting(
+        useSettingStore?.getState().language ?? DefaultLanguage,
+        value
+      );
     },
     [zToggleGuide]
   );
