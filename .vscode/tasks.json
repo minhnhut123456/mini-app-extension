@@ -7,6 +7,7 @@
       "type": "shell",
       "isBackground": true,
       "label": "yarn watch",
+      "command": "yarn watch",
       "dependsOn": ["yarn: watch:tsc", "yarn: watch:esbuild"],
       "presentation": {
         "reveal": "always"
