@@ -1,73 +1,20 @@
 {
-  "name": "zalo-mini-app-clone",
-  "displayName": "zalo-mini-app-clone",
-  "publisher": "NgoMinhNhut",
-  "description": "a pet project clone zalo mini app extention",
-  "version": "0.0.5",
-  "engines": {
-    "vscode": "^1.105.0"
-  },
-  "categories": [
-    "Other"
-  ],
-  "main": "./dist/extension.js",
-  "contributes": {
-    "viewsContainers": {
-      "activitybar": [
-        {
-          "id": "zaloMiniApp",
-          "title": "Zalo Mini App",
-          "icon": "media/icon.svg"
-        }
-      ]
-    },
-    "views": {
-      "zaloMiniApp": [
-        {
-          "type": "webview",
-          "icon": "media/icon.svg",
-          "id": "home",
-          "name": "Home"
-        }
-      ]
-    }
-  },
-  "scripts": {
-    "vscode:prepublish": "yarn package",
-    "package": "yarn check-types && node esbuild.js --production",
-    "compile": "yarn check-types && node esbuild.js",
-    "check-types": "tsc --noEmit",
-    "watch": "npm-run-all -p \"watch:esbuild\" \"watch:tsc\"",
-    "watch:esbuild": "node esbuild.js --watch",
-    "watch:tsc": "tsc --noEmit --watch --project tsconfig.json",
-    "pretest": "yarn compile && yarn lint",
-    "lint": "eslint src",
-    "test": "vscode-test"
-  },
-  "devDependencies": {
-    "@types/mocha": "^10.0.10",
-    "@types/node": "22.x",
-    "@types/react": "^19",
-    "@types/react-dom": "^19",
-    "@types/vscode": "^1.105.0",
-    "@typescript-eslint/eslint-plugin": "^8.45.0",
-    "@typescript-eslint/parser": "^8.45.0",
-    "@vscode/test-cli": "^0.0.11",
-    "@vscode/test-electron": "^2.5.2",
-    "esbuild": "^0.25.11",
-    "eslint": "^9.36.0",
-    "npm-run-all": "^4.1.5",
-    "typescript": "^5.9.3"
-  },
-  "packageManager": "yarn@4.10.3+sha512.c38cafb5c7bb273f3926d04e55e1d8c9dfa7d9c3ea1f36a4868fa028b9e5f72298f0b7f401ad5eb921749eb012eb1c3bb74bf7503df3ee43fd600d14a018266f",
-  "dependencies": {
-    "@tailwindcss/vite": "^4.1.16",
-    "react": "^19.2.0",
-    "react-dom": "^19.2.0",
-    "tailwindcss": "^4.1.16",
-    "vite": "^7.2.2"
-  },
+  "name": "zalo-mini-app-clone-monorepo",
+  "packageManager": "yarn@4.5.2",
+  "private": true,
   "workspaces": [
     "packages/*"
-  ]
+  ],
+  "scripts": {
+    "build:main-view": "yarn workspace main-view run build && copyfiles -u 3 packages/main-view/dist/** packages/vscode-extension/main-view-dist",
+    "dev:vscode-extension-esbuild": "yarn workspace zalo-mini-app-clone run watch:esbuild",
+    "dev:vscode-extension-tsc": "yarn workspace zalo-mini-app-clone run watch:tsc",
+    "vscode:publish": "yarn build:main-view && yarn bump:patch && yarn workspace zalo-mini-app-clone package && yarn workspace zalo-mini-app-clone run vsce publish",
+    "vscode:package": "yarn build:main-view && yarn workspace zalo-mini-app-clone package && yarn workspace zalo-mini-app-clone run vsce package",
+    "bump:patch": "yarn workspace zalo-mini-app-clone version patch"
+  },
+  "devDependencies": {
+    "@vscode/vsce": "^3.7.1",
+    "copyfiles": "^2.4.1"
+  }
 }

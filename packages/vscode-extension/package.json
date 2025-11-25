@@ -1,0 +1,79 @@
+{
+  "name": "zalo-mini-app-clone",
+  "displayName": "zalo-mini-app-clone",
+  "publisher": "NgoMinhNhut",
+  "description": "a pet project clone zalo mini app extension",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/minhnhut123456/mini-app-extension"
+  },
+  "version": "0.0.7",
+  "engines": {
+    "vscode": "^1.105.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "main": "./dist/extension.js",
+  "contributes": {
+    "viewsContainers": {
+      "activitybar": [
+        {
+          "id": "zaloMiniApp",
+          "title": "Zalo Mini App",
+          "icon": "media/icon.svg"
+        }
+      ]
+    },
+    "views": {
+      "zaloMiniApp": [
+        {
+          "type": "webview",
+          "icon": "media/icon.svg",
+          "id": "home",
+          "name": "Home"
+        }
+      ]
+    }
+  },
+  "scripts": {
+    "package": "yarn check-types && node esbuild.js --production",
+    "compile": "yarn check-types && node esbuild.js",
+    "check-types": "tsc --noEmit",
+    "watch:esbuild": "node esbuild.js --watch",
+    "watch:tsc": "tsc --noEmit --watch --project tsconfig.json",
+    "pretest": "yarn compile && yarn lint",
+    "lint": "eslint src",
+    "test": "vscode-test"
+  },
+  "devDependencies": {
+    "@types/mocha": "^10.0.10",
+    "@types/node": "22.x",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "@types/vscode": "^1.105.0",
+    "@typescript-eslint/eslint-plugin": "^8.45.0",
+    "@typescript-eslint/parser": "^8.45.0",
+    "@vscode/test-cli": "^0.0.11",
+    "@vscode/test-electron": "^2.5.2",
+    "esbuild": "^0.25.11",
+    "eslint": "^9.36.0",
+    "npm-run-all": "^4.1.5",
+    "typescript": "^5.9.3",
+    "vsce": "^2.15.0"
+  },
+  "dependencies": {
+    "@tailwindcss/vite": "^4.1.16",
+    "react": "^19.2.0",
+    "react-dom": "^19.2.0",
+    "tailwindcss": "^4.1.16",
+    "vite": "^7.2.2"
+  },
+  "vsce": {
+    "dependencies": false
+  },
+  "activationEvents": [
+    "onView:home",
+    "onStartupFinished"
+  ]
+}

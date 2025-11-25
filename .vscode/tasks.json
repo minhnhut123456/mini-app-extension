@@ -7,7 +7,7 @@
       "type": "shell",
       "isBackground": true,
       "label": "yarn watch",
-      "command": "yarn watch",
+      "command": "echo Watching started",
       "dependsOn": ["yarn: watch:tsc", "yarn: watch:esbuild"],
       "presentation": {
         "reveal": "always"
@@ -20,7 +20,7 @@
     },
     {
       "type": "shell",
-      "command": "yarn watch:esbuild",
+      "command": "yarn dev:vscode-extension-esbuild",
       "label": "yarn: watch:esbuild",
       "isBackground": true,
       "problemMatcher": "$esbuild-watch",
@@ -32,7 +32,7 @@
     },
     {
       "type": "shell",
-      "command": "yarn watch:tsc",
+      "command": "yarn dev:vscode-extension-tsc",
       "label": "yarn: watch:tsc",
       "isBackground": true,
       "problemMatcher": "$tsc-watch",

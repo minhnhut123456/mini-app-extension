@@ -37,9 +37,7 @@ export class MainViewProvider implements vscode.WebviewViewProvider {
 
     const distUri = vscode.Uri.joinPath(
       this._extension.extensionUri,
-      "packages",
-      "main-view",
-      "dist"
+      "main-view-dist"
     );
     const webviewDistUri = webview.asWebviewUri(distUri);
 
@@ -50,6 +48,7 @@ export class MainViewProvider implements vscode.WebviewViewProvider {
 
     // --- Prepare base URL ---
     const baseUrl = webviewDistUri.toString() + "/";
+    console.log("Webview base URL:", baseUrl);
     html = html.replaceAll("/__webview_base__/", baseUrl);
 
     // --- Process assets ---
