@@ -1,10 +1,10 @@
-# 🚀 [Mini App Extension]
+# 🚀 Mini App Extension
 
 
 
 ## Introduction
 
-Welcome to **[Mini App Extension]**!
+Welcome to **Mini App Extension*!
 
 This is a powerful **VS Code Editor Extension** specifically designed to simplify and accelerate the development workflow for **Mini Applications** (such as Zalo Mini App, etc.).
 
@@ -35,7 +35,7 @@ We are committed to delivering a stable and robust tool for Mini App developers,
 
 1.  **Install VS Code:** Ensure you have Visual Studio Code installed on your machine.
 2.  **Install the Extension:**
-    * Search for **"[Mini App Extension]"** on the VS Code Marketplace.
+    * Search for **Mini App Extension** on the VS Code Marketplace.
     * Alternatively, install directly from a built `.vsix` file found in this repository.
 3.  **Restart VS Code.**
 4.  The Extension will appear in your Activity Bar.
