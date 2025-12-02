@@ -1,17 +1,12 @@
 {
   "name": "zalo-mini-app-clone-monorepo",
-  "packageManager": "yarn@4.5.2",
   "private": true,
-  "workspaces": [
-    "packages/*"
-  ],
   "scripts": {
-    "build:main-view": "yarn workspace main-view run build && copyfiles -u 3 packages/main-view/dist/** packages/vscode-extension/main-view-dist",
-    "dev:vscode-extension-esbuild": "yarn workspace zalo-mini-app-clone run watch:esbuild",
-    "dev:vscode-extension-tsc": "yarn workspace zalo-mini-app-clone run watch:tsc",
-    "vscode:publish": "yarn build:main-view && yarn bump:patch && yarn workspace zalo-mini-app-clone package && yarn workspace zalo-mini-app-clone run vsce publish",
-    "vscode:package": "yarn build:main-view && yarn workspace zalo-mini-app-clone package && yarn workspace zalo-mini-app-clone run vsce package",
-    "bump:patch": "yarn workspace zalo-mini-app-clone version patch"
+    "build:main-view": "pnpm -F main-view run build && copyfiles copyfiles -u 3 packages/main-view/dist/* packages/vscode-extension/main-view-dist",
+    "dev:vscode-extension-esbuild": "pnpm -F zalo-mini-app-clone run watch:esbuild",
+    "dev:vscode-extension-tsc": "pnpm -F zalo-mini-app-clone run watch:tsc",
+    "vscode:publish": "pnpm run build:main-view && pnpm -F zalo-mini-app-clone build && node scripts/vscode-publish.js",
+    "vscode:package": "pnpm run build:main-view && pnpm -F zalo-mini-app-clone build && node scripts/vscode-package.js"
   },
   "devDependencies": {
     "@vscode/vsce": "^3.7.1",

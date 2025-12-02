@@ -13,16 +13,31 @@ import {
 } from "../ui/select";
 import { Checkbox } from "../ui/checkbox";
 import { Label } from "../ui/label";
-import useLanguage from "@/hooks/useLanguage";
-import type { Language } from "@/stores/setting";
+import {
+  DefaultGuide,
+  DefaultLanguage,
+  DefaultSidebarPosition,
+  useSettingStore,
+  type Language,
+} from "@/stores/setting";
 import useI18n from "@/hooks/useI18n";
-import useGuide from "@/hooks/useGuide";
-import useSidebarPosition from "@/hooks/useSidebarPosition";
+import { toggleSidebarPosition as vscodeToggleSidebarPosiiton } from "@/vscode-events/fire-events";
 
 const Setting = () => {
-  const { language, setLanguage } = useLanguage();
-  const { guide, toggleGuide } = useGuide();
-  const { toggleSidebarPosition, sidebarPosition } = useSidebarPosition();
+  const language =
+    useSettingStore?.((state) => state.language) ?? DefaultLanguage;
+  const setLanguage = useSettingStore?.((state) => state.setLanguage);
+
+  const guide = useSettingStore?.((state) => state.guide) ?? DefaultGuide;
+  const toggleGuide = useSettingStore?.((state) => state.toggleGuide);
+
+  const sidebarPosition =
+    useSettingStore?.((state) => state.sidebarPosition) ??
+    DefaultSidebarPosition;
+  const toggleSidebarPosition = useSettingStore?.(
+    (state) => state.toggleSidebarPosition
+  );
+
   const t = useI18n();
 
   return (
@@ -68,7 +83,10 @@ const Setting = () => {
             </p>
           )}
           <button
-            onClick={toggleSidebarPosition}
+            onClick={() => {
+              toggleSidebarPosition?.();
+              vscodeToggleSidebarPosiiton();
+            }}
             className="cursor-pointer text-[var(--vscode-button-foreground)] bg-[var(--vscode-tab-activeBackground)] px-2 py-1 rounded"
           >
             {sidebarPosition === "left"
@@ -93,9 +111,7 @@ const Setting = () => {
             <Checkbox
               id="guide"
               checked={guide}
-              onCheckedChange={(value) =>
-                typeof value === "boolean" && toggleGuide?.(value)
-              }
+              onCheckedChange={toggleGuide}
             />
             <Label htmlFor="guide">{t("setting-guide-button")}</Label>
           </div>

@@ -1,6 +1,7 @@
 {
   "main-home-title": "Home",
   "main-setting-title": "Setting",
+  "main-develop-title": "Develop",
   "home-title": "Home",
   "home-button-new-mini-app": "New mini app",
   "home-button-open-mini-app": "Open mini app",
@@ -18,5 +19,13 @@
   "setting-move-sidebar-to-left-button": "Move",
   "setting-guide-title": "Guide",
   "setting-guide-description": "Turn guide off to make it simple",
-  "setting-guide-button": "Toggle guide"
+  "setting-guide-button": "Toggle guide",
+  "develop-button-start": "Start",
+  "develop-button-stop": "Stop",
+  "develop-dev-channel-title": "Dev channel",
+  "develop-simulator-setting-title": "Simulator setting",
+  "develop-simulator": "Simulator",
+  "develop-chrome-debugger": "Chrome debugger",
+  "develop-edge-debugger": "Edge debugger",
+  "develop-default-browser": "Default browser"
 }

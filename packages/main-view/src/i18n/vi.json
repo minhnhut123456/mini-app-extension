@@ -1,6 +1,7 @@
 {
   "main-home-title": "Trang chủ",
   "main-setting-title": "Cài đặt",
+  "main-develop-title": "Phát triển",
   "home-title": "Trang chủ",
   "home-button-new-mini-app": "Tạo mini app mới",
   "home-button-open-mini-app": "Mở mini app",
@@ -18,5 +19,13 @@
   "setting-move-sidebar-to-left-button": "Chuyển",
   "setting-guide-title": "Hướng dẫn",
   "setting-guide-description": "Tắt hướng dẫn để giao diện đơn giản hơn",
-  "setting-guide-button": "Bật/tắt hướng dẫn"
+  "setting-guide-button": "Bật/tắt hướng dẫn",
+  "develop-button-start": "Khởi động",
+  "develop-button-stop": "Dừng",
+  "develop-dev-channel-title": "Dev channel",
+  "develop-simulator-setting-title": "Simulator thiết lập",
+  "develop-simulator": "Simulator",
+  "develop-chrome-debugger": "Chrome debugger",
+  "develop-edge-debugger": "Edge debugger",
+  "develop-default-browser": "Default browser"
 }

@@ -10,7 +10,7 @@
         "--extensionDevelopmentPath=${workspaceFolder}/packages/vscode-extension"
       ],
       "outFiles": ["${workspaceFolder}/out/**/*.js"],
-      "preLaunchTask": "yarn watch"
+      "preLaunchTask": "watch"
     }
   ]
 }

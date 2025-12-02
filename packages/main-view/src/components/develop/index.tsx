@@ -19,7 +19,7 @@ import {
   type Devices as DevicesType,
 } from "@/stores/setting";
 import { DevChannels, Devices } from "@/constants";
-import useToggleDevServer from "@/hooks/useToggleDevServer";
+import { turnOnDevServer, turnOffDevServer } from "@/vscode-events/fire-events";
 
 const options = [
   {
@@ -47,10 +47,10 @@ const Home = () => {
   const device = useSettingStore?.((state) => state.device);
   const setDevice = useSettingStore?.((state) => state.setDevice);
   const guide = useSettingStore?.((state) => state.guide);
-  const simulatorUrl = useSettingStore?.((state) => state.simulatorUrl);
   const ratio = device ? Devices[device].width / Devices[device].height : 1;
 
-  const { toggleDevServer, startedDevServer } = useToggleDevServer();
+  const startedDevServer = useSettingStore?.((state) => state.startedDevServer);
+  const port = useSettingStore?.((state) => state.port);
 
   return (
     <div>
@@ -71,7 +71,7 @@ const Home = () => {
             {options.map((option) => (
               <SelectItem key={option.value} value={option.value}>
                 {<option.icon className="focus:text-accent-foreground" />}
-                {option.value}
+                {t(`develop-${option.value}`)}
               </SelectItem>
             ))}
           </SelectContent>
@@ -79,7 +79,11 @@ const Home = () => {
 
         <button
           onClick={() => {
-            toggleDevServer();
+            if (startedDevServer) {
+              turnOffDevServer();
+              return;
+            }
+            turnOnDevServer(port!);
           }}
           className="cursor-pointer text-[var(--vscode-button-foreground)] bg-[var(--vscode-button-background)] px-2 py-1 rounded"
         >
@@ -97,7 +101,7 @@ const Home = () => {
       {devChannel === "simulator" && (
         <>
           <div className="gap-2 flex items-center px-2 py-1 text-[var(--vscode-tab-inactiveForeground)] bg-[var(--vscode-tab-activeBackground)]">
-            {t("simulator-setting-title")}
+            {t("develop-simulator-setting-title")}
           </div>
           <div className="flex items-center bg-[var(--vscode-tab-inactiveBackground)] p-2 gap-3">
             <Select
@@ -107,7 +111,9 @@ const Home = () => {
               }}
             >
               <SelectTrigger className="w-[180px] text-[var(--vscode-button-foreground)]">
-                <SelectValue placeholder={t("simulator-setting-title")} />
+                <SelectValue
+                  placeholder={t("develop-simulator-setting-title")}
+                />
               </SelectTrigger>
               <SelectContent className="bg-[var(--vscode-tab-inactiveBackground)] text-[var(--vscode-button-foreground)]">
                 {Object.values(Devices).map((device) => (
@@ -126,12 +132,12 @@ const Home = () => {
             }}
             className="rounded-lg gap-2 flex items-center p-4 text-[var(--vscode-tab-inactiveForeground)] bg-[var(--vscode-tab-activeBackground)]"
           >
-            {simulatorUrl ? (
+            {startedDevServer ? (
               <iframe
                 width="100%"
                 height="100%"
-                className="rounded-lg"
-                src={simulatorUrl}
+                className="rounded-lg bg-white"
+                src={`http://localhost:${port}/`}
               ></iframe>
             ) : (
               <div className="rounded-lg w-full h-full flex bg-black"></div>

@@ -1,15 +1,5 @@
 import { vscodeApi } from "@/stores/vs-code-api";
 
-export const setSetting = (language: string, guide: boolean) => {
-  vscodeApi?.postMessage({
-    type: "set-setting",
-    payload: {
-      language: language,
-      guide: guide,
-    },
-  });
-};
-
 export const toggleSidebarPosition = () => {
   vscodeApi?.postMessage({
     type: "toggle-sidebar-position",
@@ -22,11 +12,18 @@ export const triggerCreateMiniApp = () => {
   });
 };
 
-export const turnDevServer = (isTurnOn: boolean) => {
+export const turnOnDevServer = (port: number) => {
+  console.log("asjasjhan");
   vscodeApi?.postMessage({
-    type: "turn-dev-server",
+    type: "turn-on-dev-server",
     payload: {
-      isTurnOn: isTurnOn,
+      port,
     },
+  });
+};
+
+export const turnOffDevServer = () => {
+  vscodeApi?.postMessage({
+    type: "turn-off-dev-server",
   });
 };

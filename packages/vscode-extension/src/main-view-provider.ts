@@ -7,6 +7,12 @@ import {
 } from "./global-state";
 import { MessageType, PersistedStateKey, RegisteredCommand } from "./constants";
 import { runDevServer, stopDevServer } from "./actions/dev-server";
+import {
+  startDevServerError,
+  startDevServerSuccess,
+  stopDevServerError,
+  stopDevServerSuccess,
+} from "./vscode-events/fire-events";
 
 export class MainViewProvider implements vscode.WebviewViewProvider {
   constructor(private readonly _extension: vscode.ExtensionContext) {}
@@ -48,7 +54,6 @@ export class MainViewProvider implements vscode.WebviewViewProvider {
 
     // --- Prepare base URL ---
     const baseUrl = webviewDistUri.toString() + "/";
-    console.log("Webview base URL:", baseUrl);
     html = html.replaceAll("/__webview_base__/", baseUrl);
 
     // --- Process assets ---
@@ -93,14 +98,19 @@ export class MainViewProvider implements vscode.WebviewViewProvider {
         case MessageType.TRIGGER_CREATE_MINI_APP:
           vscode.commands.executeCommand(RegisteredCommand.CREATE_MINI_APP);
           break;
-        case MessageType.TURN_DEV_SERVER:
-          const isTurnOn = message.payload?.isTurnOn;
-
-          if (isTurnOn) {
-            runDevServer();
-          } else {
-            stopDevServer();
-          }
+        case MessageType.TURN_ON_DEV_SERVER:
+          const port = message.payload?.port || 3001;
+          await runDevServer({
+            port,
+            onSuccess: () => startDevServerSuccess(webviewView),
+            onError: () => startDevServerError(webviewView),
+          });
+          break;
+        case MessageType.TURN_OFF_DEV_SERVER:
+          await stopDevServer({
+            onSuccess: () => stopDevServerSuccess(webviewView),
+            onError: () => stopDevServerError(webviewView),
+          });
           break;
       }
     });

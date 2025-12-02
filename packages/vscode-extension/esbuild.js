@@ -19,6 +19,7 @@ async function main() {
       "lightningcss", // Vite’s CSS processor
       "fsevents",
       "esbuild",
+      "vite",
     ],
     logLevel: "warning",
     plugins: [

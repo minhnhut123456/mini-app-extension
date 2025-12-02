@@ -17,7 +17,7 @@ type State = {
   devChannel: DevChannels;
   device: Devices;
   sidebarPosition: SidebarPosition;
-  simulatorUrl: string;
+  port: number;
 };
 
 interface SettingStore {
@@ -26,16 +26,17 @@ interface SettingStore {
   sidebarPosition: SidebarPosition;
   devChannel: DevChannels;
   device: Devices;
-  simulatorUrl: string;
   startedDevServer: boolean;
+  port: number;
 
   setLanguage: (language: Language) => void;
   toggleGuide: () => void;
   toggleSidebarPosition: () => void;
   setDevChannel: (devChannel: DevChannels) => void;
   setDevice: (device: Devices) => void;
-  toggleDevServer: () => void;
-  startDevServer: (url: string) => void;
+  startDevServer: () => void;
+  stopDevServer: () => void;
+  setPort: (port: number) => void;
 }
 
 let useSettingStore: ReturnType<typeof _createSettingStore> | null = null;
@@ -44,6 +45,7 @@ const DefaultGuide = true;
 const DefaultSidebarPosition = "left";
 const DefaultDevChannel = DevChannels.SIMULATOR;
 const DefaultDevice = Devices.IP15.key;
+const DefaultPort = 3001;
 
 const _createSettingStore = (state: State) => {
   return create<SettingStore>((set) => ({
@@ -52,8 +54,8 @@ const _createSettingStore = (state: State) => {
     sidebarPosition: state?.sidebarPosition || DefaultSidebarPosition,
     devChannel: state?.devChannel || DefaultDevChannel,
     device: state?.device || DefaultDevice,
-    simulatorUrl: state?.simulatorUrl || "",
     startedDevServer: false,
+    port: state?.port || DefaultPort,
     setLanguage: (language: Language) => {
       set({ language });
     },
@@ -71,11 +73,14 @@ const _createSettingStore = (state: State) => {
     setDevice: (device: Devices) => {
       set({ device });
     },
-    toggleDevServer: () => {
-      set((state) => ({ startedDevServer: !state.startedDevServer }));
+    startDevServer: () => {
+      set({ startedDevServer: true });
     },
-    startDevServer: (url: string) => {
-      set({ simulatorUrl: url, startedDevServer: true });
+    stopDevServer: () => {
+      set({ startedDevServer: false });
+    },
+    setPort: (port: number) => {
+      set({ port });
     },
   }));
 };

@@ -19,7 +19,7 @@ declare global {
       sidebarPosition: SidebarPosition;
       devChannel: DevChannels;
       device: Devices;
-      simulatorUrl: string;
+      port: number;
     };
 
     /** Global acquire function (injected by VS Code) */

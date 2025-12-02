@@ -41,6 +41,7 @@ const copyAndRender = async (
 // This method is called when your extension is activated
 // Your extension is activated the very first time the command is executed
 export async function activate(context: vscode.ExtensionContext) {
+  console.log("Zalo Mini App Clone extension is now active!");
   // Check has just create mini app --> focus on extension view
   const hasJustCreateMiniApp = context.globalState.get<boolean>(
     PersistedStateKey.HAS_JUST_CREATE_MINI_APP
@@ -56,8 +57,11 @@ export async function activate(context: vscode.ExtensionContext) {
   }
 
   const provider = new MainViewProvider(context);
+
   context.subscriptions.push(
-    vscode.window.registerWebviewViewProvider("home", provider)
+    vscode.window.registerWebviewViewProvider("home", provider, {
+      webviewOptions: { retainContextWhenHidden: true },
+    })
   );
 
   // Register the command

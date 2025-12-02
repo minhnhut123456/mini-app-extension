@@ -8,6 +8,7 @@
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
     "resolveJsonModule": true,
+    "allowJs": true,
     // "rootDir": "src",
     "strict": true /* enable all strict type-checking options */
     /* Additional Checks */
